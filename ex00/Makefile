@@ -6,7 +6,7 @@
 #    By: svereten <svereten@student.42vienna.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/29 13:57:20 by svereten          #+#    #+#              #
-#    Updated: 2025/05/29 14:35:41 by svereten         ###   ########.fr        #
+#    Updated: 2025/06/05 17:07:01 by svereten         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 NAME = ex00
@@ -52,7 +52,7 @@ ${OBJ_DIRS}:
 tests: test/bin
 	valgrind ./test/bin
 
-test/bin: ${TEST_OBJS}
+test/bin: ${TEST_OBJS} ${OBJS}
 	mkdir -p test
 	${CXX} ${CXXFLAGS} $^ -o test/bin -I/usr/src/googletest/googletest/include \
     -L/usr/lib \
