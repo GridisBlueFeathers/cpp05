@@ -1,6 +1,7 @@
 ex0*
 
 obj
+test
 
 .cache
 compile_commands.json

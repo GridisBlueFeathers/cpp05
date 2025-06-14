@@ -6,9 +6,14 @@
 #    By: svereten <svereten@student.42vienna.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/29 13:57:20 by svereten          #+#    #+#              #
-#    Updated: 2025/06/05 17:07:01 by svereten         ###   ########.fr        #
+#    Updated: 2025/06/14 13:08:52 by svereten         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+################################################################################
+#
+#	Project variables
+#
+################################################################################
 NAME = ex00
 
 CXX = c++
@@ -19,22 +24,26 @@ INCLUDE = -I./include
 
 SRC_DIR = src
 OBJ_DIR = obj
-TEST_DIR = test
+BIN_DIR = bin
 
 FILES = Bureaucrat
 
 OBJS = ${FILES:%=${OBJ_DIR}/%.o}
 DEPS = ${FILES:%=${OBJ_DIR}/%.d}
 
-OBJ_DIRS = ${sort ${dir ${OBJS}}}
-
-TESTS = ${FILES:%=${TEST_DIR}/%}
-
+TESTS = ${FILES:%=${BIN_DIR}/%}
 TEST_OBJS = ${FILES:%=${OBJ_DIR}/test%.o}
 
+OBJ_DIRS = ${sort ${dir ${OBJS}}}
 TEST_DIRS = ${sort ${dir ${TESTS}}}
 
 DEBUG = 0
+
+################################################################################
+#
+#	Project targets
+#
+################################################################################
 
 all: ${NAME}
 
@@ -49,36 +58,48 @@ ${OBJ_DIRS}:
 
 -include ${DEPS}
 
-tests: test/bin
-	valgrind ./test/bin
+################################################################################
+#
+#	Tests targets
+#
+################################################################################
 
-test/bin: ${TEST_OBJS} ${OBJS}
-	mkdir -p test
-	${CXX} ${CXXFLAGS} $^ -o test/bin -I/usr/src/googletest/googletest/include \
-    -L/usr/lib \
-    -lgtest -lgtest_main -pthread
+tests: bin/allTests
+	valgrind ./bin/allTests
+
+bin/allTests: ${TEST_OBJS} ${OBJS}
+	mkdir -p bin
+	${CXX} ${CXXFLAGS} $^ -o bin/allTests \
+		-I/usr/src/googletest/googletest/include \
+		-L/usr/lib \
+		-lgtest -lgtest_main -pthread
 
 test%: ${TEST_DIR}/%
 	valgrind ./$<
 
 ${TEST_DIR}/%: ${OBJ_DIR}/test%.o ${OBJS} | ${TEST_DIRS}
-	${CXX} ${CXXFLAGS} $^ -o $@ -I/usr/src/googletest/googletest/include \
-    -L/usr/lib \
-    -lgtest -lgtest_main -pthread
+	${CXX} ${CXXFLAGS} $^ -o $@ \
+		-I/usr/src/googletest/googletest/include \
+		-L/usr/lib \
+		-lgtest -lgtest_main -pthread
 
 ${TEST_DIRS}:
 	mkdir -p $@
 
-print:
-	echo ${TEST_OBJS}
+################################################################################
+#
+#	Project rules
+#
+################################################################################
 
 clean:
 	rm -rf ${OBJ_DIR}
 	rm -rf compile_commands.json
+	rm -rf .cache
 
 fclean: clean
 	rm -rf ${NAME}
-	rm -rf ${TEST_DIR}
+	rm -rf ${BIN_DIR}
 
 re: fclean all
 
@@ -86,6 +107,9 @@ run: ${NAME}
 	./${NAME} ${ARGS}
 
 valgrind: ${NAME}
-	valgrind --leak-check=full --show-leak-kinds=all ./${NAME} ${ARGS}
+	valgrind \
+		--leak-check=full \
+		--show-leak-kinds=all \
+		./${NAME} ${ARGS}
 
 .PHONY: all clean fclean re run valgrind
