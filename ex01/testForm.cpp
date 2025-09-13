@@ -1,0 +1,56 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   testForm.cpp                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: svereten <svereten@student.42vienna.com>   +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/09/13 14:32:02 by svereten          #+#    #+#             */
+/*   Updated: 2025/09/13 14:43:24 by svereten         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+#include "Form.hpp"
+#include <gtest/gtest.h>
+
+TEST(form, constructors) {
+	// Default constructor
+	EXPECT_NO_THROW({Form a;});
+
+	// Copy constructor
+	Form a;
+	EXPECT_NO_THROW({Form b(a);});
+
+	// Name, toSign, toExecute constructor
+	EXPECT_NO_THROW({Form b("Johnny", 150, 150);});
+
+	EXPECT_THROW({Form tooLowToSign("LowToSign", 151, 150);},
+		Bureaucrat::GradeTooLowException);
+	EXPECT_THROW({Form tooLowToExecute("LowToExecute", 150, 151);},
+		Bureaucrat::GradeTooLowException);
+	EXPECT_THROW({Form tooLowBoth("LowBoth", 151, 151);},
+		Bureaucrat::GradeTooLowException);
+	EXPECT_THROW({Form tooHighToSign("HighToSign", 0, 1);},
+		Bureaucrat::GradeTooHighException);
+	EXPECT_THROW({Form tooHighToExecute("HighToExecute", 1, 0);},
+		Bureaucrat::GradeTooHighException);
+	EXPECT_THROW({Form tooHighBoth("HighBoth", 0, 0);},
+		Bureaucrat::GradeTooHighException);
+}
+
+TEST(form, operators) {
+	// Assignment operator
+	Form a("A", 1, 1);
+
+	EXPECT_NO_THROW({Form b = a;});
+	Form b = a;
+	EXPECT_EQ(b.getName(), a.getName());
+	EXPECT_EQ(b.getSigned(), a.getSigned());
+	EXPECT_EQ(b.getToSign(), a.getToSign());
+	EXPECT_EQ(b.getToExecute(), a.getToExecute());
+
+	// Stream insertion operator
+	testing::internal::CaptureStdout();
+	std::cout << a;
+	std::string out = testing::internal::GetCapturedStdout();
+	EXPECT_EQ(out, "Form: A\nStatus: not signed\nGrade to sign: 1\nGrade to execute: 1\n");
+}
