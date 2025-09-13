@@ -6,7 +6,7 @@
 /*   By: svereten <svereten@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/13 14:32:02 by svereten          #+#    #+#             */
-/*   Updated: 2025/09/13 14:43:24 by svereten         ###   ########.fr       */
+/*   Updated: 2025/09/13 14:58:03 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "Form.hpp"
@@ -21,7 +21,7 @@ TEST(form, constructors) {
 	EXPECT_NO_THROW({Form b(a);});
 
 	// Name, toSign, toExecute constructor
-	EXPECT_NO_THROW({Form b("Johnny", 150, 150);});
+	EXPECT_NO_THROW({Form b("Form", 150, 150);});
 
 	EXPECT_THROW({Form tooLowToSign("LowToSign", 151, 150);},
 		Bureaucrat::GradeTooLowException);
@@ -53,4 +53,23 @@ TEST(form, operators) {
 	std::cout << a;
 	std::string out = testing::internal::GetCapturedStdout();
 	EXPECT_EQ(out, "Form: A\nStatus: not signed\nGrade to sign: 1\nGrade to execute: 1\n");
+}
+
+TEST(form, getters) {
+	Form a("Form", 42, 69);
+
+	EXPECT_EQ(a.getName(), "Form");
+	EXPECT_EQ(a.getSigned(), false);
+	EXPECT_EQ(a.getToSign(), 42);
+	EXPECT_EQ(a.getToExecute(), 69);
+}
+
+TEST(form, beSigned) {
+	Form a("Form", 42, 69);
+	Bureaucrat tooLow("tooLow", 150);
+	Bureaucrat ok("ok", 42);
+
+	EXPECT_THROW({a.beSigned(tooLow);}, Bureaucrat::GradeTooLowException);
+	EXPECT_NO_THROW({a.beSigned(ok);});
+	EXPECT_THROW({a.beSigned(ok);}, Form::FormIsSignedException);
 }

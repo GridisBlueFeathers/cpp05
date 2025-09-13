@@ -6,7 +6,7 @@
 /*   By: svereten <svereten@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 14:32:32 by svereten          #+#    #+#             */
-/*   Updated: 2025/09/13 14:30:52 by svereten         ###   ########.fr       */
+/*   Updated: 2025/09/13 14:51:22 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "Bureaucrat.hpp"
@@ -89,5 +89,4 @@ TEST(Bureaucrat, signForm) {
 		std::string out = testing::internal::GetCapturedStderr();
 		EXPECT_EQ(out, "Johnny couldn't sign Not Passing Form because of Grade is too low\n");
 	}
-
 }
