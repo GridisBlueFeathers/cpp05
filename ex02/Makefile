@@ -6,7 +6,7 @@
 #    By: svereten <svereten@student.42vienna.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/29 13:57:20 by svereten          #+#    #+#              #
-#    Updated: 2025/09/13 15:09:00 by svereten         ###   ########.fr        #
+#    Updated: 2025/09/18 14:49:25 by svereten         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 ################################################################################
@@ -28,7 +28,7 @@ BIN_DIR = bin
 
 FILES = Bureaucrat \
 		AForm \
-		# ShrubberyCreationForm \
+		ShrubberyCreationForm \
 		# RobotomyRequestForm \
 		# PresidentialPardonForm \
 
@@ -54,7 +54,7 @@ all: ${NAME}
 ${NAME}: ${OBJS} ${OBJ_DIR}/main.o
 	${CXX} ${CXXFLAGS} $^ -o $@
 
-${OBJ_DIR}/%.o: %.cpp | ${OBJ_DIRS}
+${OBJ_DIR}/%.o: ${SRC_DIR}/%.cpp | ${OBJ_DIRS}
 	bear --append -- ${CXX} ${CXXFLAGS} ${INCLUDE} -D DEBUG=${DEBUG} -c $< -o $@
 
 ${OBJ_DIRS}:

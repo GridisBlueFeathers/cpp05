@@ -6,7 +6,7 @@
 /*   By: svereten <svereten@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 19:18:36 by svereten          #+#    #+#             */
-/*   Updated: 2025/09/13 16:10:29 by svereten         ###   ########.fr       */
+/*   Updated: 2025/09/18 14:35:58 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #pragma once
@@ -24,7 +24,6 @@ class AForm {
 		const unsigned int	_toSign;
 		const unsigned int	_toExecute;
 		bool				_signed;
-		bool				_executed;
 
 		AForm();
 		AForm(const AForm &other);
@@ -42,7 +41,6 @@ class AForm {
 		unsigned int		getToSign(void) const;
 		unsigned int		getToExecute(void) const;
 		bool				getSigned(void) const;
-		bool				getExecuted(void) const;
 	
 		void				beSigned(Bureaucrat bureaucrat);
 		virtual void		execute(Bureaucrat const &executor) const = 0;

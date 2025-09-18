@@ -6,7 +6,7 @@
 /*   By: svereten <svereten@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 14:17:38 by svereten          #+#    #+#             */
-/*   Updated: 2025/09/13 15:12:12 by svereten         ###   ########.fr       */
+/*   Updated: 2025/09/18 14:57:03 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "Bureaucrat.hpp"
@@ -67,7 +67,7 @@ void	Bureaucrat::decreaseGrade() {
 	_grade++;
 }
 
-void	Bureaucrat::signForm(AForm &form) {
+void	Bureaucrat::signForm(AForm &form) const {
 	try {
 		form.beSigned(*this);
 		std::cout << getName() << " signed " << form.getName() << std::endl;
@@ -77,6 +77,15 @@ void	Bureaucrat::signForm(AForm &form) {
 			<< form.getName() << " because of "
 			<< e.what() << std::endl;
 	}
+}
+
+void	Bureaucrat::executeForm(AForm const &form) const {
+	try {
+		form.execute(*this);
+	} catch (std::exception &e) {
+
+	}
+
 }
 
 const char	*Bureaucrat::GradeTooLowException::what() const throw() {

@@ -6,7 +6,7 @@
 /*   By: svereten <svereten@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 19:28:26 by svereten          #+#    #+#             */
-/*   Updated: 2025/09/13 16:11:48 by svereten         ###   ########.fr       */
+/*   Updated: 2025/09/18 14:35:45 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "AForm.hpp"
@@ -15,8 +15,7 @@ AForm::AForm():
 	_name("Some form"),
 	_toSign(150),
 	_toExecute(150),
-	_signed(false),
-	_executed(false) {
+	_signed(false) {
 	if (DEBUG)
 		std::cerr << "Form " << _name << " was created(default)\n";
 }
@@ -25,8 +24,7 @@ AForm::AForm(const AForm &other):
 	_name(other._name),
 	_toSign(other._toSign),
 	_toExecute(other._toExecute),
-	_signed(other._signed),
-	_executed(other._executed) {
+	_signed(other._signed) {
 	if (DEBUG)
 		std::cerr << "Form " << _name << " was created(copy)\n";
 }
@@ -39,8 +37,7 @@ AForm::AForm(const std::string &name,
 	_target(target),
 	_toSign(toSign),
 	_toExecute(toExecute), 
-	_signed(false),
-	_executed(false) {
+	_signed(false) {
 	if (_toSign < 1 || _toExecute < 1)
 		throw Bureaucrat::GradeTooHighException();
 	if (_toSign > 150 || _toExecute > 150)
@@ -80,10 +77,6 @@ bool	AForm::getSigned() const {
 	return (_signed);
 }
 
-bool	AForm::getExecuted() const {
-	return (_executed);
-}
-
 void	AForm::beSigned(Bureaucrat bureaucrat) {
 	if (_signed)
 		throw AForm::FormIsSignedException();
@@ -103,10 +96,7 @@ const char	*AForm::FormIsNotSignedException::what() const throw() {
 std::ostream	&operator<<(std::ostream &out, AForm &form) {
 	out << "Form: " << form.getName() << "\n"
 		<< "Target: " << form.getTarget() << "\n"
-		<< "Status: " << (form.getSigned() ?
-			form.getExecuted() ? "signed, executed": "signed, not executed"
-				: "not signed")
-		<< "\n"
+		<< "Status: " << (form.getSigned() ? "signed" : "not signed") << "\n"
 		<< "Grade to sign: " << form.getToSign() << "\n"
 		<< "Grade to execute: " << form.getToExecute() << std::endl;
 	return (out);

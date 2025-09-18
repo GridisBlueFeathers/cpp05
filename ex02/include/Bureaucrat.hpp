@@ -6,7 +6,7 @@
 /*   By: svereten <svereten@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 14:18:24 by svereten          #+#    #+#             */
-/*   Updated: 2025/09/13 15:09:22 by svereten         ###   ########.fr       */
+/*   Updated: 2025/09/18 14:54:58 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #pragma once
@@ -36,7 +36,8 @@ public:
 
 	void				increaseGrade(void);
 	void				decreaseGrade(void);
-	void				signForm(AForm &form);
+	void				signForm(AForm &form) const;
+	void				executeForm(AForm const &form) const;
 
 	class GradeTooHighException: public std::exception {
 		public:
