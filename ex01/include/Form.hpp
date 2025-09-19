@@ -6,7 +6,7 @@
 /*   By: svereten <svereten@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 19:18:36 by svereten          #+#    #+#             */
-/*   Updated: 2025/09/11 19:54:02 by svereten         ###   ########.fr       */
+/*   Updated: 2025/09/19 14:13:02 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #pragma once
@@ -39,7 +39,17 @@ class Form {
 	
 		void				beSigned(Bureaucrat bureaucrat);
 
-		class FormIsSignedException: public std::exception {
+		class GradeTooLowException: public std::exception {
+			public:
+				virtual const char	*what() const throw();	
+		};
+
+		class GradeTooHighException: public std::exception {
+			public:
+				virtual const char	*what() const throw();	
+		};
+
+		class IsSignedException: public std::exception {
 			public:
 				virtual const char	*what() const throw();	
 		};

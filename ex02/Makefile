@@ -6,7 +6,7 @@
 #    By: svereten <svereten@student.42vienna.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/29 13:57:20 by svereten          #+#    #+#              #
-#    Updated: 2025/09/18 14:49:25 by svereten         ###   ########.fr        #
+#    Updated: 2025/09/19 14:26:03 by svereten         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 ################################################################################
@@ -14,7 +14,7 @@
 #	Project variables
 #
 ################################################################################
-NAME = ex02
+NAME = ex01
 
 CXX = c++
 
@@ -27,10 +27,7 @@ OBJ_DIR = obj
 BIN_DIR = bin
 
 FILES = Bureaucrat \
-		AForm \
-		ShrubberyCreationForm \
-		# RobotomyRequestForm \
-		# PresidentialPardonForm \
+		Form \
 
 OBJS = ${FILES:%=${OBJ_DIR}/%.o}
 DEPS = ${FILES:%=${OBJ_DIR}/%.d}
@@ -78,10 +75,10 @@ bin/allTests: ${TEST_OBJS} ${OBJS}
 		-L/usr/lib \
 		-lgtest -lgtest_main -pthread
 
-test%: ${TEST_DIR}/%
+test%: ${BIN_DIR}/%
 	valgrind ./$<
 
-${TEST_DIR}/%: ${OBJ_DIR}/test%.o ${OBJS} | ${TEST_DIRS}
+${BIN_DIR}/%: ${OBJ_DIR}/test%.o ${OBJS} | ${TEST_DIRS}
 	${CXX} ${CXXFLAGS} $^ -o $@ \
 		-I/usr/src/googletest/googletest/include \
 		-L/usr/lib \

@@ -6,7 +6,7 @@
 #    By: svereten <svereten@student.42vienna.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/29 13:57:20 by svereten          #+#    #+#              #
-#    Updated: 2025/09/18 16:01:26 by svereten         ###   ########.fr        #
+#    Updated: 2025/09/19 14:29:44 by svereten         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 ################################################################################
@@ -26,7 +26,7 @@ SRC_DIR = src
 OBJ_DIR = obj
 BIN_DIR = bin
 
-FILES = Bureaucrat
+FILES = Bureaucrat \
 
 OBJS = ${FILES:%=${OBJ_DIR}/%.o}
 DEPS = ${FILES:%=${OBJ_DIR}/%.d}
@@ -74,10 +74,10 @@ bin/allTests: ${TEST_OBJS} ${OBJS}
 		-L/usr/lib \
 		-lgtest -lgtest_main -pthread
 
-test%: ${TEST_DIR}/%
+test%: ${BIN_DIR}/%
 	valgrind ./$<
 
-${TEST_DIR}/%: ${OBJ_DIR}/test%.o ${OBJS} | ${TEST_DIRS}
+${BIN_DIR}/%: ${OBJ_DIR}/test%.o ${OBJS} | ${TEST_DIRS}
 	${CXX} ${CXXFLAGS} $^ -o $@ \
 		-I/usr/src/googletest/googletest/include \
 		-L/usr/lib \

@@ -6,7 +6,7 @@
 /*   By: svereten <svereten@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/13 14:32:02 by svereten          #+#    #+#             */
-/*   Updated: 2025/09/13 14:58:03 by svereten         ###   ########.fr       */
+/*   Updated: 2025/09/19 14:07:33 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "Form.hpp"
@@ -24,17 +24,17 @@ TEST(form, constructors) {
 	EXPECT_NO_THROW({Form b("Form", 150, 150);});
 
 	EXPECT_THROW({Form tooLowToSign("LowToSign", 151, 150);},
-		Bureaucrat::GradeTooLowException);
+		Form::GradeTooLowException);
 	EXPECT_THROW({Form tooLowToExecute("LowToExecute", 150, 151);},
-		Bureaucrat::GradeTooLowException);
+		Form::GradeTooLowException);
 	EXPECT_THROW({Form tooLowBoth("LowBoth", 151, 151);},
-		Bureaucrat::GradeTooLowException);
+		Form::GradeTooLowException);
 	EXPECT_THROW({Form tooHighToSign("HighToSign", 0, 1);},
-		Bureaucrat::GradeTooHighException);
+		Form::GradeTooHighException);
 	EXPECT_THROW({Form tooHighToExecute("HighToExecute", 1, 0);},
-		Bureaucrat::GradeTooHighException);
+		Form::GradeTooHighException);
 	EXPECT_THROW({Form tooHighBoth("HighBoth", 0, 0);},
-		Bureaucrat::GradeTooHighException);
+		Form::GradeTooHighException);
 }
 
 TEST(form, operators) {
@@ -69,7 +69,7 @@ TEST(form, beSigned) {
 	Bureaucrat tooLow("tooLow", 150);
 	Bureaucrat ok("ok", 42);
 
-	EXPECT_THROW({a.beSigned(tooLow);}, Bureaucrat::GradeTooLowException);
+	EXPECT_THROW({a.beSigned(tooLow);}, Form::GradeTooLowException);
 	EXPECT_NO_THROW({a.beSigned(ok);});
-	EXPECT_THROW({a.beSigned(ok);}, Form::FormIsSignedException);
+	EXPECT_THROW({a.beSigned(ok);}, Form::IsSignedException);
 }

@@ -6,7 +6,7 @@
 /*   By: svereten <svereten@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 19:28:26 by svereten          #+#    #+#             */
-/*   Updated: 2025/09/13 14:38:43 by svereten         ###   ########.fr       */
+/*   Updated: 2025/09/19 14:13:00 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "Form.hpp"
@@ -35,9 +35,9 @@ Form::Form(const std::string &name, unsigned int toSign, unsigned int toExecute)
 	_toSign(toSign),
 	_toExecute(toExecute) {
 	if (_toSign < 1 || _toExecute < 1)
-		throw Bureaucrat::GradeTooHighException();
+		throw Form::GradeTooHighException();
 	if (_toSign > 150 || _toExecute > 150)
-		throw Bureaucrat::GradeTooLowException();
+		throw Form::GradeTooLowException();
 	if (DEBUG)
 		std::cerr << "Form " << _name << " was created(name, toSign, toExecute)\n";
 }
@@ -71,13 +71,21 @@ unsigned int	Form::getToExecute() const {
 
 void	Form::beSigned(Bureaucrat bureaucrat) {
 	if (_signed)
-		throw Form::FormIsSignedException();
+		throw Form::IsSignedException();
 	if (bureaucrat.getGrade() > _toSign)
-		throw Bureaucrat::GradeTooLowException();
+		throw Form::GradeTooLowException();
 	_signed = true;
 }
 
-const char	*Form::FormIsSignedException::what() const throw() {
+const char	*Form::GradeTooLowException::what() const throw() {
+	return ("Grade is too low");
+}
+
+const char	*Form::GradeTooHighException::what() const throw() {
+	return ("Grade is too high");
+}
+
+const char	*Form::IsSignedException::what() const throw() {
 	return ("Form is already signed");
 }
 
