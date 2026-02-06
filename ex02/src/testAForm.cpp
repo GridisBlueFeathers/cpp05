@@ -6,10 +6,11 @@
 /*   By: svereten <svereten@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/13 14:32:02 by svereten          #+#    #+#             */
-/*   Updated: 2025/09/13 15:55:03 by svereten         ###   ########.fr       */
+/*   Updated: 2026/02/06 15:26:06 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "AForm.hpp"
+#include "PresidentialPardonForm.hpp"
 #include <gtest/gtest.h>
 
 /**
@@ -52,27 +53,29 @@ TEST(form, operators) {
 	// EXPECT_EQ(b.getToExecute(), a.getToExecute());
 
 	// Stream insertion operator
+	
+	AForm *a = new PresidentialPardonForm("John");
 	testing::internal::CaptureStdout();
 	std::cout << a;
 	std::string out = testing::internal::GetCapturedStdout();
-	EXPECT_EQ(out, "Form: A\nStatus: not signed\nGrade to sign: 1\nGrade to execute: 1\n");
+	EXPECT_EQ(out, "Form: John\nStatus: not signed\nGrade to sign: 25\nGrade to execute: 5\n");
 }
 
 TEST(form, getters) {
-	AForm a("AForm", 42, 69);
+	AForm *a = new PresidentialPardonForm("John");
 
-	EXPECT_EQ(a.getName(), "AForm");
-	EXPECT_EQ(a.getSigned(), false);
-	EXPECT_EQ(a.getToSign(), 42);
-	EXPECT_EQ(a.getToExecute(), 69);
+	EXPECT_EQ(a->getName(), "John");
+	EXPECT_EQ(a->getSigned(), false);
+	EXPECT_EQ(a->getToSign(), 25);
+	EXPECT_EQ(a->getToExecute(), 5);
 }
 
 TEST(form, beSigned) {
-	AForm a("AForm", 42, 69);
+	AForm *a = new PresidentialPardonForm("John");
 	Bureaucrat tooLow("tooLow", 150);
 	Bureaucrat ok("ok", 42);
 
-	EXPECT_THROW({a.beSigned(tooLow);}, Bureaucrat::GradeTooLowException);
-	EXPECT_NO_THROW({a.beSigned(ok);});
-	EXPECT_THROW({a.beSigned(ok);}, AForm::FormIsSignedException);
+	EXPECT_THROW({a->beSigned(tooLow);}, AForm::GradeTooLowException);
+	EXPECT_NO_THROW({a->beSigned(ok);});
+	EXPECT_THROW({a->beSigned(ok);}, AForm::FormIsSignedException);
 }

@@ -6,22 +6,24 @@
 /*   By: svereten <svereten@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 14:17:38 by svereten          #+#    #+#             */
-/*   Updated: 2025/09/18 14:57:03 by svereten         ###   ########.fr       */
+/*   Updated: 2026/02/06 14:57:09 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "Bureaucrat.hpp"
 #include "AForm.hpp"
 
 Bureaucrat::Bureaucrat(): _name("John"), _grade(150) {
-	if (DEBUG)
-		std::cerr << "Bureaucrat " << _name << " was created(default)\n";
+#if DEBUG
+	std::cerr << "Bureaucrat " << _name << " was created(default)\n";
+#endif
 }
 
 Bureaucrat::Bureaucrat(const Bureaucrat &other):
 	_name(other._name),
 	_grade(other._grade) {
-	if (DEBUG)
-		std::cerr << "Bureaucrat " << _name << " was created(copy)\n";
+#if DEBUG
+	std::cerr << "Bureaucrat " << _name << " was created(copy)\n";
+#endif
 }
 
 Bureaucrat::Bureaucrat(const std::string &name, unsigned int grade):
@@ -31,13 +33,15 @@ Bureaucrat::Bureaucrat(const std::string &name, unsigned int grade):
 		throw GradeTooHighException();
 	if (_grade > 150)
 		throw GradeTooLowException();
-	if (DEBUG)
-		std::cerr << "Bureaucrat " << _name << " was created(name, rank)\n";
+#if DEBUG
+	std::cerr << "Bureaucrat " << _name << " was created(name, rank)\n";
+#endif
 }
 
 Bureaucrat::~Bureaucrat() {
-	if (DEBUG)
-		std::cerr << "Bureaucrat " << _name << " was destroyed\n";
+#if DEBUG
+	std::cerr << "Bureaucrat " << _name << " was destroyed\n";
+#endif
 }
 
 Bureaucrat	&Bureaucrat::operator=(const Bureaucrat &other) {

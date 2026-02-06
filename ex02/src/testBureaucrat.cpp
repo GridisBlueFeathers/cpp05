@@ -6,11 +6,12 @@
 /*   By: svereten <svereten@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 14:32:32 by svereten          #+#    #+#             */
-/*   Updated: 2025/09/13 15:19:17 by svereten         ###   ########.fr       */
+/*   Updated: 2026/02/06 15:20:37 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "Bureaucrat.hpp"
 #include "AForm.hpp"
+#include "PresidentialPardonForm.hpp"
 #include <gtest/gtest.h>
 
 TEST(Bureaucrat, constructors) {
@@ -65,28 +66,28 @@ TEST(Bureaucrat, gradeMutation) {
 }
 
 TEST(Bureaucrat, signForm) {
-	Bureaucrat	a("Johnny", 42);
-	AForm		passing("Passing Form", 100, 1);
-	AForm		notPassing("Not Passing Form", 1, 1);
+	Bureaucrat	a("Johnny", 24);
+	Bureaucrat	b("Jane", 26);
+	PresidentialPardonForm		form("John Doe");
 
 	{
 		testing::internal::CaptureStdout();
-		a.signForm(passing);
+		a.signForm(form);
 		std::string out = testing::internal::GetCapturedStdout();
 		EXPECT_EQ(out, "Johnny signed Passing Form\n");
 	}
 
 	{
 		testing::internal::CaptureStderr();
-		a.signForm(passing);
+		a.signForm(form);
 		std::string out = testing::internal::GetCapturedStderr();
 		EXPECT_EQ(out, "Johnny couldn't sign Passing Form because of Form is already signed\n");
 	}
 
 	{
 		testing::internal::CaptureStderr();
-		a.signForm(notPassing);
+		b.signForm(form);
 		std::string out = testing::internal::GetCapturedStderr();
-		EXPECT_EQ(out, "Johnny couldn't sign Not Passing Form because of Grade is too low\n");
+		EXPECT_EQ(out, "Jane couldn't sign Not Passing Form because of Grade is too low\n");
 	}
 }

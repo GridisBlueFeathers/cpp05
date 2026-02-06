@@ -6,7 +6,7 @@
 /*   By: svereten <svereten@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 19:28:26 by svereten          #+#    #+#             */
-/*   Updated: 2025/09/18 14:35:45 by svereten         ###   ########.fr       */
+/*   Updated: 2026/02/06 15:28:15 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "AForm.hpp"
@@ -16,8 +16,9 @@ AForm::AForm():
 	_toSign(150),
 	_toExecute(150),
 	_signed(false) {
-	if (DEBUG)
-		std::cerr << "Form " << _name << " was created(default)\n";
+#if DEBUG
+	std::cerr << "Form " << _name << " was created(default)\n";
+#endif
 }
 
 AForm::AForm(const AForm &other):
@@ -25,16 +26,15 @@ AForm::AForm(const AForm &other):
 	_toSign(other._toSign),
 	_toExecute(other._toExecute),
 	_signed(other._signed) {
-	if (DEBUG)
-		std::cerr << "Form " << _name << " was created(copy)\n";
+#if DEBUG
+	std::cerr << "Form " << _name << " was created(copy)\n";
+#endif
 }
 
 AForm::AForm(const std::string &name,
-	const std::string &target,
 	unsigned int toSign,
 	unsigned int toExecute):
 	_name(name),
-	_target(target),
 	_toSign(toSign),
 	_toExecute(toExecute), 
 	_signed(false) {
@@ -42,13 +42,15 @@ AForm::AForm(const std::string &name,
 		throw Bureaucrat::GradeTooHighException();
 	if (_toSign > 150 || _toExecute > 150)
 		throw Bureaucrat::GradeTooLowException();
-	if (DEBUG)
-		std::cerr << "Form " << _name << " was created(name, toSign, toExecute)\n";
+#if DEBUG
+	std::cerr << "Form " << _name << " was created(name, toSign, toExecute)\n";
+#endif
 }
 
 AForm::~AForm() {
-	if (DEBUG)
-		std::cerr << "Form " << _name << " was destroyed\n";
+#if DEBUG
+	std::cerr << "Form " << _name << " was destroyed\n";
+#endif
 }
 
 AForm &AForm::operator=(const AForm &other) {
@@ -59,10 +61,6 @@ AForm &AForm::operator=(const AForm &other) {
 
 const std::string	&AForm::getName() const {
 	return (_name);
-}
-
-const std::string	&AForm::getTarget() const {
-	return (_target);
 }
 
 unsigned int	AForm::getToSign() const {
@@ -85,6 +83,14 @@ void	AForm::beSigned(Bureaucrat bureaucrat) {
 	_signed = true;
 }
 
+const char	*AForm::GradeTooHighException::what() const throw() {
+	return ("Grade is too high");
+}
+
+const char	*AForm::GradeTooLowException::what() const throw() {
+	return ("Grade is too low");
+}
+
 const char	*AForm::FormIsSignedException::what() const throw() {
 	return ("Form is already signed");
 }
@@ -95,7 +101,6 @@ const char	*AForm::FormIsNotSignedException::what() const throw() {
 
 std::ostream	&operator<<(std::ostream &out, AForm &form) {
 	out << "Form: " << form.getName() << "\n"
-		<< "Target: " << form.getTarget() << "\n"
 		<< "Status: " << (form.getSigned() ? "signed" : "not signed") << "\n"
 		<< "Grade to sign: " << form.getToSign() << "\n"
 		<< "Grade to execute: " << form.getToExecute() << std::endl;
