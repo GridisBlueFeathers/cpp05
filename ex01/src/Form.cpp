@@ -6,18 +6,20 @@
 /*   By: svereten <svereten@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 19:28:26 by svereten          #+#    #+#             */
-/*   Updated: 2025/09/19 14:13:00 by svereten         ###   ########.fr       */
+/*   Updated: 2026/02/06 14:47:19 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "Form.hpp"
+#include "Bureaucrat.hpp"
 
 Form::Form():
 	_name("Some form"),
 	_signed(false),
 	_toSign(150),
 	_toExecute(150) {
-	if (DEBUG)
-		std::cerr << "Form " << _name << " was created(default)\n";
+#if DEBUG
+	std::cerr << "Form " << _name << " was created(default)\n";
+#endif
 }
 
 Form::Form(const Form &other):
@@ -25,8 +27,9 @@ Form::Form(const Form &other):
 	_signed(other._signed),
 	_toSign(other._toSign),
 	_toExecute(other._toExecute) {
-	if (DEBUG)
-		std::cerr << "Form " << _name << " was created(copy)\n";
+#if DEBUG
+	std::cerr << "Form " << _name << " was created(copy)\n";
+#endif
 }
 
 Form::Form(const std::string &name, unsigned int toSign, unsigned int toExecute):
@@ -38,13 +41,15 @@ Form::Form(const std::string &name, unsigned int toSign, unsigned int toExecute)
 		throw Form::GradeTooHighException();
 	if (_toSign > 150 || _toExecute > 150)
 		throw Form::GradeTooLowException();
-	if (DEBUG)
-		std::cerr << "Form " << _name << " was created(name, toSign, toExecute)\n";
+#if DEBUG
+	std::cerr << "Form " << _name << " was created(name, toSign, toExecute)\n";
+#endif
 }
 
 Form::~Form() {
-	if (DEBUG)
-		std::cerr << "Form " << _name << " was destroyed\n";
+#if DEBUG
+	std::cerr << "Form " << _name << " was destroyed\n";
+#endif
 }
 
 Form &Form::operator=(const Form &other) {

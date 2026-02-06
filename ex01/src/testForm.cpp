@@ -6,10 +6,11 @@
 /*   By: svereten <svereten@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/13 14:32:02 by svereten          #+#    #+#             */
-/*   Updated: 2025/09/19 14:07:33 by svereten         ###   ########.fr       */
+/*   Updated: 2026/02/06 14:48:35 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "Form.hpp"
+#include "Bureaucrat.hpp"
 #include <gtest/gtest.h>
 
 TEST(form, constructors) {

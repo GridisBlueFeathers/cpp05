@@ -6,7 +6,7 @@
 /*   By: svereten <svereten@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 14:18:24 by svereten          #+#    #+#             */
-/*   Updated: 2025/09/13 14:28:29 by svereten         ###   ########.fr       */
+/*   Updated: 2026/02/06 14:45:45 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #pragma once
@@ -50,4 +50,5 @@ public:
 };
 
 std::ostream	&operator<<(std::ostream &out, Bureaucrat bureaucrat);
+
 #endif 

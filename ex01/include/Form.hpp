@@ -6,7 +6,7 @@
 /*   By: svereten <svereten@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 19:18:36 by svereten          #+#    #+#             */
-/*   Updated: 2025/09/19 14:13:02 by svereten         ###   ########.fr       */
+/*   Updated: 2026/02/06 14:47:09 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #pragma once
@@ -15,7 +15,7 @@
 
 # include <string>
 
-# include "Bureaucrat.hpp"
+class Bureaucrat;
 
 class Form {
 	private:
