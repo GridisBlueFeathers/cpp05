@@ -6,7 +6,7 @@
 #    By: svereten <svereten@student.42vienna.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/29 13:57:20 by svereten          #+#    #+#              #
-#    Updated: 2025/09/19 14:29:44 by svereten         ###   ########.fr        #
+#    Updated: 2026/02/06 14:40:40 by svereten         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 ################################################################################
@@ -37,7 +37,7 @@ TEST_OBJS = ${FILES:%=${OBJ_DIR}/test%.o}
 OBJ_DIRS = ${sort ${dir ${OBJS}}}
 TEST_DIRS = ${sort ${dir ${TESTS}}}
 
-DEBUG = 0
+DEFS = -D DEBUG=0
 
 ################################################################################
 #
@@ -51,7 +51,7 @@ ${NAME}: ${OBJS} ${OBJ_DIR}/main.o
 	${CXX} ${CXXFLAGS} $^ -o $@
 
 ${OBJ_DIR}/%.o: ${SRC_DIR}/%.cpp | ${OBJ_DIRS}
-	bear --append -- ${CXX} ${CXXFLAGS} ${INCLUDE} -D DEBUG=${DEBUG} -c $< -o $@
+	bear --append -- ${CXX} ${CXXFLAGS} ${INCLUDE} ${DEFS} -c $< -o $@
 
 ${OBJ_DIRS}:
 	mkdir -p $@
