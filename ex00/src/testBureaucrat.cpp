@@ -6,12 +6,11 @@
 /*   By: svereten <svereten@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 14:32:32 by svereten          #+#    #+#             */
-/*   Updated: 2025/06/14 13:01:02 by svereten         ###   ########.fr       */
+/*   Updated: 2026/02/27 11:02:10 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "Bureaucrat.hpp"
 #include <gtest/gtest.h>
-#include <exception>
 
 TEST(Bureaucrat, constructors) {
 	// Default constructor
@@ -62,5 +61,4 @@ TEST(Bureaucrat, gradeMutation) {
 	EXPECT_NO_THROW({low.decreaseGrade();});
 	EXPECT_EQ(low.getGrade(), 150);
 	EXPECT_THROW({low.decreaseGrade();}, Bureaucrat::GradeTooLowException);
-
 }
