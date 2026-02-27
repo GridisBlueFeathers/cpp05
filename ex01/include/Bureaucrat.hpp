@@ -6,10 +6,9 @@
 /*   By: svereten <svereten@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 14:18:24 by svereten          #+#    #+#             */
-/*   Updated: 2026/02/06 14:45:45 by svereten         ###   ########.fr       */
+/*   Updated: 2026/02/27 11:04:02 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#pragma once
 #ifndef BUREAUCRAT_HPP
 # define BUREAUCRAT_HPP
 

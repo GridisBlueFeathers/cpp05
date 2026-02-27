@@ -6,11 +6,10 @@
 /*   By: svereten <svereten@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 13:59:06 by svereten          #+#    #+#             */
-/*   Updated: 2025/09/13 15:00:01 by svereten         ###   ########.fr       */
+/*   Updated: 2026/02/27 11:06:29 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <exception>
 #include <iostream>
 #include "Bureaucrat.hpp"
 #include "Form.hpp"
