@@ -6,7 +6,7 @@
 /*   By: svereten <svereten@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 14:17:38 by svereten          #+#    #+#             */
-/*   Updated: 2026/02/06 14:57:09 by svereten         ###   ########.fr       */
+/*   Updated: 2026/02/27 11:37:36 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "Bureaucrat.hpp"
@@ -87,9 +87,10 @@ void	Bureaucrat::executeForm(AForm const &form) const {
 	try {
 		form.execute(*this);
 	} catch (std::exception &e) {
-
+		std::cerr << *this << " couldn't execute " 
+			<< form.getName() << " form because "
+			<< e.what() << std::endl;
 	}
-
 }
 
 const char	*Bureaucrat::GradeTooLowException::what() const throw() {

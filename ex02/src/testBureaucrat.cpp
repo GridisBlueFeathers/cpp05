@@ -6,7 +6,7 @@
 /*   By: svereten <svereten@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 14:32:32 by svereten          #+#    #+#             */
-/*   Updated: 2026/02/06 15:20:37 by svereten         ###   ########.fr       */
+/*   Updated: 2026/04/03 18:41:28 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "Bureaucrat.hpp"
@@ -74,20 +74,20 @@ TEST(Bureaucrat, signForm) {
 		testing::internal::CaptureStdout();
 		a.signForm(form);
 		std::string out = testing::internal::GetCapturedStdout();
-		EXPECT_EQ(out, "Johnny signed Passing Form\n");
+		EXPECT_EQ(out, "Johnny signed John Doe\n");
 	}
 
 	{
 		testing::internal::CaptureStderr();
 		a.signForm(form);
 		std::string out = testing::internal::GetCapturedStderr();
-		EXPECT_EQ(out, "Johnny couldn't sign Passing Form because of Form is already signed\n");
+		EXPECT_EQ(out, "Johnny couldn't sign John Doe because of Form is already signed\n");
 	}
 
 	{
 		testing::internal::CaptureStderr();
 		b.signForm(form);
 		std::string out = testing::internal::GetCapturedStderr();
-		EXPECT_EQ(out, "Jane couldn't sign Not Passing Form because of Grade is too low\n");
+		EXPECT_EQ(out, "Jane couldn't sign John Doe because of Form is already signed\n");
 	}
 }

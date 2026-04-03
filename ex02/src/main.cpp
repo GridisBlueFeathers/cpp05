@@ -6,7 +6,7 @@
 /*   By: svereten <svereten@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 13:59:06 by svereten          #+#    #+#             */
-/*   Updated: 2026/02/06 14:58:00 by svereten         ###   ########.fr       */
+/*   Updated: 2026/02/27 11:37:52 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,15 @@
 #include <iostream>
 #include "Bureaucrat.hpp"
 #include "AForm.hpp"
-#include "ShrubberyCreationForm.hpp"
+#include "RobotomyRequestForm.hpp"
 
 int main() {
-/**	Bureaucrat	john("John", 69);
-	AForm		*form = new ShrubberyCreationForm("some_file");
+	Bureaucrat	john("John", 25);
+	AForm		*form = new RobotomyRequestForm("john doe");
 	
 	std::cerr << *form;
 	john.signForm(*form);
 	std::cerr << *form;
-	delete form;*/
+	john.executeForm(*form);
+	delete form;
 }

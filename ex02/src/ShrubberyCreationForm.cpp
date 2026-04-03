@@ -1,39 +1,43 @@
 #include "ShrubberyCreationForm.hpp"
+#include "Bureaucrat.hpp"
 #include <fstream>
 
-ShrubberyCreationForm::ShrubberyCreationForm(): AForm(
-	"Shrubbery creation form",
-	"Default target",
-	145,
-	137
-) {
-	if (DEBUG)
-		std::cerr << "ShrubberyCreationForm " << getName() << " was created(default)\n";
+ShrubberyCreationForm::ShrubberyCreationForm():
+	AForm("Shrubbery creation form", 145, 137)
+{
+#if DEBUG
+	std::cerr << "ShrubberyCreationForm " << getName() << " was created(default)\n";
+#endif
 }
 
-ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm &other): AForm(
-	other.getName(),
-	other.getTarget(),
-	other.getToSign(),
-	other.getToExecute()
-) {
-	if (DEBUG)
-		std::cerr << "ShrubberyCreationForm " << getName() << " was created(copy)\n";
+ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm &other):
+	AForm(
+		other.getName(),
+		other.getToSign(),
+		other.getToExecute()
+	)
+{
+#if DEBUG
+	std::cerr << "ShrubberyCreationForm " << getName() << " was created(copy)\n";
+#endif
 }
 
-ShrubberyCreationForm::ShrubberyCreationForm(const std::string &target): AForm(
-	"Shrubbery creation form",
-	target,
-	145,
-	137
-) {
-	if (DEBUG)
-		std::cerr << "ShrubberyCreationForm " << getName() << " was created(target)\n";
+ShrubberyCreationForm::ShrubberyCreationForm(const std::string &target):
+	AForm(
+		target,
+		145,
+		137
+	)
+{
+#if DEBUG
+	std::cerr << "ShrubberyCreationForm " << getName() << " was created(target)\n";
+#endif
 }
 
 ShrubberyCreationForm::~ShrubberyCreationForm() {
-	if (DEBUG)
-		std::cerr << "ShrubberyCreationForm " << getName() << " was destroyed\n";
+#if DEBUG
+	std::cerr << "ShrubberyCreationForm " << getName() << " was destroyed\n";
+#endif
 }
 
 void	ShrubberyCreationForm::execute(Bureaucrat const &executor) const {
@@ -44,68 +48,33 @@ void	ShrubberyCreationForm::execute(Bureaucrat const &executor) const {
 	if (executor.getGrade() > getToExecute())
 		throw Bureaucrat::GradeTooLowException();
 
-	outfile.open(getTarget() + "_shrubbery");
+	outfile.open(getName() + "_shrubbery");
 	if (!(outfile <<
-		"                    SJJJJS"
-		"                   IKJKKKKKJKI"
-		"                  TJKKKKKKKKKKKKJ"
-		"                  JKKKKKKKKKKKKKKKJJ"
-		"                 OJKKKKKKKKKKKKKKKJKJJ"
-		"                 JKKKKKKKKKKKKKKKKKKKKJJV                                    OKJJJJJJJJJJ"
-		"                 KKKKKKKKKKKKKKKKKKKKKKKJJZ                             YJJKJKKKKKKKKKKKJ"
-		"                SJKKKKKKKKKKKKKKKKKKKKKKKKJJ                        YJJKKKKKKKKKKKKKKKKKJT"
-		"                IJKKKKKKKKKKKKKKKKKKKKKKKKKKJJ                   KJKKKKKKKKKKKKKKKKKKKKKJN"
-		"                JKKKKJKJKKKKKKKKKKKKKKKKKKKKKKKV              LJJKKKKKKKKKKKKKKKKKKKKKKKJU"
-		"                JJKKKJ  JJKKKKKKKKKKKKKKKKKKKKKJJKKJJJK    RKKKKKKKKKKKKKKKKKKKKKKKKKKKKJ"
-		"               XJJKKKJ   JKKKKKKKKKKKKKKKKKKKKKJXZZZZZZYKJJJKKKKKKKKKKKKKKKKKKKKKKKKKKKKJ"
-		"        KJJJJLSJJKKKKN   HKKKKKKKKKKKKKKKKKKKKJYYYYYYYYYYYVJKKKKKKKKKKKKKKKKKKKKKKKKKKKJJ"
-		"       XJKKKKKKKKKKKJ     JJKKKKKKKKKKKKKKKKKKKGZYYYYYYYYYZIKKKKKKKKKKKKKKKKKKKKKKKKKKKKJ"
-		"       IJKKKKKKKKKKKJ     JJKKKKKKKKKKKKKKKKKKKKJJPZZZZZ WIJKKKKKKKKKKKKKKKKKKKKKKKKKKKKK"
-		"       JJJQLJJKKKKKJJ     HJKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK"
-		"       JKJ   KJKKKKJN    WKKKKKKKKKKKKKKKKKJJJJJJKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKJJKKKKKKKK"
-		"       JJJ     JJKKJQ   TJKKKKKKKKJJJJJJGW          ZJFIJJKKJJKKKKKKKKKKKKKKKJMVJKKKKKKJJ"
-		"YJJJL  KJJ       JKJ   YJJKKKKKKKJJO                         IJKJKKKKKKKKKKKJK  JJKKKKKKJJKJJJJ"
-		"   JJJJJJK        ZT  ZJKKKKKKKKQ                              ZJKKKKKKKKKKKJQ  JJKKKKKKKKKKKKJ"
-		"     KJKKJ            JKKKKJJJ                                   VJKKKKKKKKKJJN JKKKKKKKKKKKKJJ"
-		"      ZJJI           NJKKJJJ             HEE                       IJKKKKKKKKJJ MJKKKKKKKKKKKJM"
-		"        UN          TKKKKJQ             CFFFE            HO         JJJKKKKKKKJPUJKKKJJK  JJKJO"
-		"                    JJKJJ              QFFFEE          NEFFE         TKKKKKKKKKK JJJQ     KKKKY"
-		"                   GJJKJ               EFFFEH          EFFFEN         TJJKKKKKJJ         XJKKK"
-		"                   KKKJ                EFFFEI         BFFFFEM          WJKKKKKJJ         RKKKJKKJJJ"
-		"                  JJKJK                EFFFD          DFFFFEK           NKKKKKJJP        MKKKKKKKX"
-		"                  JJKI                 HEFF           AEFFFE             JJKKKJJF        MKKJKX"
-		"                 MJJJR                                 EFFEW             KJKKKKKG"
-		"                 KKJJ                                                     JKKKJJN"
-		"                YJKJG         BEEEDDAFX                                   IKKKJJY"
-		"                JJKJY         FEEEEEEED   DEDDEGHP                        IKKKJK"
-		"                JKKJ          NDEEEEEEEC BEEEEEEEDDEEED    BI             LKKKJJ"
-		"               TJJKM           BEEEEEEEEEEEEEEEEEEEEEEEA XDEEEEEEEA       PKKKKK"
-		"               IJKKR            DEEEEEEEEEEEEEEEEEEEEEEDDEEEEEEEEE         KKKJJ"
-		"               KKKJZ             DEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEA         JKKJK"
-		"              XJKKJ               DEEEEEEEEEEEEEEEEEEEEEEEEEEEEED          KKKJK"
-		"              UJKJK                 EEEEEEEEEEEEEEEEEEEEEEEEEEEK           KKKJH"
-		"              NKKJQ                   DEEEEEEEEEEEEEEEEEEEEEDD            ZKKKJR"
-		"              IKKJZ                      FDDEEDEEEEEEDDDDDE               PKKJJ"
-		"              IKKJ                           UEACCCCBAT                   KKKJJ"
-		"              PKKJ                                                        LKKJN"
-		"              WJKY                                                        LKJJN"
-		"               JL                                                         MKJJ"
-		"                           ZHJKKI                                         TKJJ"
-		"                      XMJJJJJJKKJJJLY                         QJJJJJJP     JJP"
-		"                   IJJJJJJJKKKKKKKJKKJJJHLZ            ZJHJJJJJJKKKKJKKJJKMJKU"
-		"                VJJKJL     KKKKKKKKKKKKKKKKKJKJJJJJJKKKKKKKKKKKKKKKKKKKKKKKKJM"
-		"              NLR         KJKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKJN   RMJJKJJI"
-		"                         KKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKJO        JJJJ"
-		"                        LJKKKKKKJKJJJ  JJKKKKKKKKKKKKKKKKKKKKKKKKKKKKKJ            JX"
-		"                       TJKKKKKKJP      ZJKKKKKKKKKKKKKKJPPJJKKKKKKKKKKJ "
-		"                      WJKKJJKZ          SJKKKKKKKKKKKJJ    WJJKKKKKKKKKH"
-		"                     SJJJP               JJKKKKKKKKJJJ        JJKJKKKKJJ"
-		"                    UJM                   JKKKKKKKKJL           MJKKKKKJ"
-		"                                          NKKKKKKKKN              MJJKJJX"
-		"                                           KKKKKKJX                 YKJJI"
-		"                                            JKKKKZ                    MJJ"
-		"                                            JKKJZ                       R"
-		"                                             JJY"
-		"                                             JN"))
+"		            .        +          .      .          ."
+"     .            _        .                    ."
+"  ,              /;-._,-.____        ,-----.__"
+" ((        .    (_:#::_.:::. `-._   /:, /-._, `._,"
+"  `                 \\   _|`\"=:_::.`.);  \\ __/ /"
+"                      ,    `./  \\:. `.   )==-'  ."
+"    .      ., ,-=-.  ,\\, +#./`   \\:.  / /           ."
+".           \\/:/`-' , ,\\ '` ` `   ): , /_  -o"
+"       .    /:+- - + +- : :- + + -:'  /(o-) \\)     ."
+"  .      ,=':  \\    ` `/` ' , , ,:' `'--\".--\"---._/`7"
+"   `.   (    \\: \\,-._` ` + '\\, ,\"   _,--._,---\":.__/"
+"              \\:  `  X` _| _,\\/'   .-'"
+".               \":._:`\\____  /:'  /      .           ."
+"                    \\::.  :\\/:'  /              +"
+"   .                 `.:.  /:'  }      ."
+"           .           ):_(:;   \\           ."
+"                      /:. _/ ,  |"
+"                   . (|::.     ,`                  ."
+"     .                |::.    {\\"
+"                      |::.\\  \\ `."
+"                      |:::(\\    |"
+"              O       |:::/{ }  |                  (o"
+"               )  ___/#\\::`/ (O \"==._____   O, (O  /`"
+"          ~~~w/w~\"~~,\\` `:/,-(~`\"~~~~~~~~\"~o~\\~/~w|/~"
+"dew   ~~~~~~~~~~~~~~~~~~~~~~~\\W~~~~~~~~~~~~\\|/~~"
+	))
 		std::cerr << "Shrubbery creation failed :(";
 }

@@ -6,16 +6,15 @@
 /*   By: svereten <svereten@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 19:18:36 by svereten          #+#    #+#             */
-/*   Updated: 2026/02/06 15:15:45 by svereten         ###   ########.fr       */
+/*   Updated: 2026/02/27 11:12:28 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#pragma once
 #ifndef FORM_HPP
 # define FORM_HPP
 
 # include <string>
 
-# include "Bureaucrat.hpp"
+class Bureaucrat;
 
 class AForm {
 	private:

@@ -1,11 +1,13 @@
 #include "PresidentialPardonForm.hpp"
+#include "Bureaucrat.hpp"
 
 PresidentialPardonForm::PresidentialPardonForm():
 	AForm(
 		"PresidentialPardonForm",
 		25,
 		5
-	) {
+	)
+{
 #if DEBUG
 	std::cerr << "PresidentialPardonForm " << _name << " was created(default)\n";
 #endif
@@ -16,7 +18,8 @@ PresidentialPardonForm::PresidentialPardonForm(const PresidentialPardonForm &oth
 		other.getName(),
 		other.getToSign(),
 		other.getToExecute()
-	) {
+	)
+{
 #if DEBUG
 	std::cerr << "PresidentialPardonForm " << _name << " was created(copy)\n";
 #endif
@@ -27,7 +30,8 @@ PresidentialPardonForm::PresidentialPardonForm(const std::string &target):
 		target,
 		25,
 		5
-	) {
+	)
+{
 #if DEBUG
 	std::cerr << "PresidentialPardonForm " << _name << " was created(target)\n";
 #endif

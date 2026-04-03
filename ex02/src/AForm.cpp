@@ -6,10 +6,11 @@
 /*   By: svereten <svereten@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 19:28:26 by svereten          #+#    #+#             */
-/*   Updated: 2026/02/06 15:28:15 by svereten         ###   ########.fr       */
+/*   Updated: 2026/02/27 11:13:10 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "AForm.hpp"
+#include "Bureaucrat.hpp"
 
 AForm::AForm():
 	_name("Some form"),

@@ -6,11 +6,12 @@
 /*   By: svereten <svereten@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/13 14:32:02 by svereten          #+#    #+#             */
-/*   Updated: 2026/02/06 15:26:06 by svereten         ###   ########.fr       */
+/*   Updated: 2026/04/03 18:44:53 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "AForm.hpp"
 #include "PresidentialPardonForm.hpp"
+#include "Bureaucrat.hpp"
 #include <gtest/gtest.h>
 
 /**
@@ -41,7 +42,7 @@
 // 		Bureaucrat::GradeTooHighException);
 // }
 
-TEST(form, operators) {
+TEST(AForm, operators) {
 	// Assignment operator shouldn't work with abstract classes
 	// AForm a("A", 1, 1);
 	//
@@ -56,12 +57,15 @@ TEST(form, operators) {
 	
 	AForm *a = new PresidentialPardonForm("John");
 	testing::internal::CaptureStdout();
-	std::cout << a;
+	std::cout << *a;
 	std::string out = testing::internal::GetCapturedStdout();
-	EXPECT_EQ(out, "Form: John\nStatus: not signed\nGrade to sign: 25\nGrade to execute: 5\n");
+	EXPECT_EQ(out, "Form: John\n"
+				   "Status: not signed\n"
+				   "Grade to sign: 25\n"
+				   "Grade to execute: 5\n");
 }
 
-TEST(form, getters) {
+TEST(AForm, getters) {
 	AForm *a = new PresidentialPardonForm("John");
 
 	EXPECT_EQ(a->getName(), "John");
@@ -70,12 +74,12 @@ TEST(form, getters) {
 	EXPECT_EQ(a->getToExecute(), 5);
 }
 
-TEST(form, beSigned) {
+TEST(AForm, beSigned) {
 	AForm *a = new PresidentialPardonForm("John");
 	Bureaucrat tooLow("tooLow", 150);
-	Bureaucrat ok("ok", 42);
+	Bureaucrat ok("ok", 1);
 
-	EXPECT_THROW({a->beSigned(tooLow);}, AForm::GradeTooLowException);
+	EXPECT_THROW({a->beSigned(tooLow);}, Bureaucrat::GradeTooLowException);
 	EXPECT_NO_THROW({a->beSigned(ok);});
 	EXPECT_THROW({a->beSigned(ok);}, AForm::FormIsSignedException);
 }
