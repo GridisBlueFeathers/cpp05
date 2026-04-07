@@ -6,7 +6,7 @@
 /*   By: svereten <svereten@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/13 14:32:02 by svereten          #+#    #+#             */
-/*   Updated: 2026/04/03 18:44:53 by svereten         ###   ########.fr       */
+/*   Updated: 2026/04/07 16:36:17 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "AForm.hpp"
@@ -63,6 +63,7 @@ TEST(AForm, operators) {
 				   "Status: not signed\n"
 				   "Grade to sign: 25\n"
 				   "Grade to execute: 5\n");
+	delete a;
 }
 
 TEST(AForm, getters) {
@@ -72,6 +73,7 @@ TEST(AForm, getters) {
 	EXPECT_EQ(a->getSigned(), false);
 	EXPECT_EQ(a->getToSign(), 25);
 	EXPECT_EQ(a->getToExecute(), 5);
+	delete a;
 }
 
 TEST(AForm, beSigned) {
@@ -82,4 +84,5 @@ TEST(AForm, beSigned) {
 	EXPECT_THROW({a->beSigned(tooLow);}, Bureaucrat::GradeTooLowException);
 	EXPECT_NO_THROW({a->beSigned(ok);});
 	EXPECT_THROW({a->beSigned(ok);}, AForm::FormIsSignedException);
+	delete a;
 }

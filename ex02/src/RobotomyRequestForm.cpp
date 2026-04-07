@@ -55,7 +55,7 @@ void	RobotomyRequestForm::execute(Bureaucrat const &executor) const {
 		throw FormIsNotSignedException();
 	if (executor.getGrade() > getToExecute())
 		throw GradeTooLowException();
-	if (rand() % 2)
+	if (RAND % 2)
 		std::cout << getName() << " was sucessfully robotomized!" << std::endl;
 	else
 		throw RoboromyFailException();

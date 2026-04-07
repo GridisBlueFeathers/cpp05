@@ -3,6 +3,17 @@
 
 # include "AForm.hpp"
 
+# if TEST_ENV
+#  ifndef RAND
+#   define RAND 1
+#  endif
+# else 
+#  ifndef RAND
+#   define RAND rand()
+#  endif
+# endif
+
+
 class RobotomyRequestForm: public AForm {
 	public:
 		RobotomyRequestForm();

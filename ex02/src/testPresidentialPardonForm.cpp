@@ -16,16 +16,16 @@ TEST(PresidentialPardonForm, constructors) {
 }
 
 TEST(PresidentialPardonForm, execute) {
-	AForm *a = new PresidentialPardonForm("John");
+	AForm *form = new PresidentialPardonForm("John");
 	Bureaucrat ok("ok", 1);
 	Bureaucrat notOk("notOk", 150);
 
-	EXPECT_THROW({a->execute(ok);}, AForm::FormIsNotSignedException);
-	a->beSigned(ok);
-	EXPECT_THROW({a->execute(notOk);}, AForm::GradeTooLowException);
+	EXPECT_THROW({form->execute(ok);}, AForm::FormIsNotSignedException);
+	form->beSigned(ok);
+	EXPECT_THROW({form->execute(notOk);}, AForm::GradeTooLowException);
 	testing::internal::CaptureStdout();
-	a->execute(ok);
+	form->execute(ok);
 	std::string output = testing::internal::GetCapturedStdout();
 	EXPECT_EQ(output, "John was pardoned by Zaphod Beeblebrox\n");
-	delete a;
+	delete form;
 }
