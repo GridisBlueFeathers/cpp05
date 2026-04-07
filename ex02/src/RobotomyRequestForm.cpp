@@ -46,7 +46,7 @@ RobotomyRequestForm::~RobotomyRequestForm() {
 #endif
 }
 
-const char	*RobotomyRequestForm::FormIsNotSignedException::what() const throw() {
+const char	*RobotomyRequestForm::RoboromyFailException::what() const throw() {
 	return ("There was an error during robotomization");
 }
 

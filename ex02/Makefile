@@ -6,7 +6,7 @@
 #    By: svereten <svereten@student.42vienna.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/29 13:57:20 by svereten          #+#    #+#              #
-#    Updated: 2026/04/03 17:59:19 by svereten         ###   ########.fr        #
+#    Updated: 2026/04/07 13:07:54 by svereten         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 ################################################################################
@@ -29,6 +29,8 @@ BIN_DIR = bin
 FILES = Bureaucrat \
 		AForm \
 		PresidentialPardonForm \
+		ShrubberyCreationForm \
+		RobotomyRequestForm 
 
 OBJS = ${FILES:%=${OBJ_DIR}/%.o}
 DEPS = ${FILES:%=${OBJ_DIR}/%.d}
