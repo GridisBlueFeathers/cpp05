@@ -40,7 +40,7 @@ TEST(RobotomyRequestForm, execute) {
 
 	EXPECT_THROW({form->execute(ok);}, AForm::FormIsNotSignedException);
 	form->beSigned(ok);
-	EXPECT_THROW({form->execute(notOk);}, AForm::GradeTooLowException);
+	EXPECT_THROW({form->execute(notOk);}, Bureaucrat::GradeTooLowException);
 	if (RAND % 2) {
 		testing::internal::CaptureStdout();
 		form->execute(ok);

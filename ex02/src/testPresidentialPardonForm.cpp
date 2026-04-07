@@ -22,7 +22,7 @@ TEST(PresidentialPardonForm, execute) {
 
 	EXPECT_THROW({form->execute(ok);}, AForm::FormIsNotSignedException);
 	form->beSigned(ok);
-	EXPECT_THROW({form->execute(notOk);}, AForm::GradeTooLowException);
+	EXPECT_THROW({form->execute(notOk);}, Bureaucrat::GradeTooLowException);
 	testing::internal::CaptureStdout();
 	form->execute(ok);
 	std::string output = testing::internal::GetCapturedStdout();
