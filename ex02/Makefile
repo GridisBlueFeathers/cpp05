@@ -6,7 +6,7 @@
 #    By: svereten <svereten@student.42vienna.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/29 13:57:20 by svereten          #+#    #+#              #
-#    Updated: 2026/04/07 16:38:26 by svereten         ###   ########.fr        #
+#    Updated: 2026/04/20 16:22:56 by svereten         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 ################################################################################
@@ -69,7 +69,7 @@ ${OBJ_DIRS}:
 ################################################################################
 
 tests: DEFS := ${DEFS} -D TEST_ENV=1
-tests: bin/allTests
+tests: re bin/allTests
 	valgrind \
 		--leak-check=full \
 		--show-leak-kinds=all \
@@ -79,17 +79,6 @@ tests: bin/allTests
 bin/allTests: ${TEST_OBJS} ${OBJS}
 	mkdir -p bin
 	${CXX} ${CXXFLAGS} $^ -o bin/allTests \
-		-I/usr/src/googletest/googletest/include \
-		-L/usr/lib \
-		-lgtest -lgtest_main -pthread
-
-test%: ${BIN_DIR}/%
-	valgrind \
-		--leak-check=full \
-		./$<
-
-${BIN_DIR}/%: ${OBJ_DIR}/test%.o ${OBJS} | ${TEST_DIRS}
-	${CXX} ${CXXFLAGS} $^ -o $@ \
 		-I/usr/src/googletest/googletest/include \
 		-L/usr/lib \
 		-lgtest -lgtest_main -pthread

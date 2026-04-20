@@ -45,6 +45,8 @@ TEST(ShrubberyCreationForm, execute) {
 	form->execute(ok);
 	std::string output = testing::internal::GetCapturedStderr();
 	EXPECT_EQ(output, "Shrubbery creation failed :(\n");
+	chmod("John_shrubbery", 0644);
+	remove("John_shrubbery");
 
 	delete form;
 }
