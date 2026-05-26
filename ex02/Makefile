@@ -6,7 +6,7 @@
 #    By: svereten <svereten@student.42vienna.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/29 13:57:20 by svereten          #+#    #+#              #
-#    Updated: 2026/04/20 16:22:56 by svereten         ###   ########.fr        #
+#    Updated: 2026/05/26 12:28:22 by svereten         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 ################################################################################
@@ -35,11 +35,7 @@ FILES = Bureaucrat \
 OBJS = ${FILES:%=${OBJ_DIR}/%.o}
 DEPS = ${FILES:%=${OBJ_DIR}/%.d}
 
-TESTS = ${FILES:%=${BIN_DIR}/%}
-TEST_OBJS = ${FILES:%=${OBJ_DIR}/test%.o}
-
 OBJ_DIRS = ${sort ${dir ${OBJS}}}
-TEST_DIRS = ${sort ${dir ${TESTS}}}
 
 DEFS = -D DEBUG=0
 
@@ -55,36 +51,12 @@ ${NAME}: ${OBJS} ${OBJ_DIR}/main.o
 	${CXX} ${CXXFLAGS} $^ -o $@
 
 ${OBJ_DIR}/%.o: ${SRC_DIR}/%.cpp | ${OBJ_DIRS}
-	bear --append -- ${CXX} ${CXXFLAGS} ${INCLUDE} ${DEFS} -c $< -o $@
+	${CXX} ${CXXFLAGS} ${INCLUDE} ${DEFS} -c $< -o $@
 
 ${OBJ_DIRS}:
 	mkdir -p $@
 
 -include ${DEPS}
-
-################################################################################
-#
-#	Tests targets
-#
-################################################################################
-
-tests: DEFS := ${DEFS} -D TEST_ENV=1
-tests: re bin/allTests
-	valgrind \
-		--leak-check=full \
-		--show-leak-kinds=all \
-		./bin/allTests
-
-
-bin/allTests: ${TEST_OBJS} ${OBJS}
-	mkdir -p bin
-	${CXX} ${CXXFLAGS} $^ -o bin/allTests \
-		-I/usr/src/googletest/googletest/include \
-		-L/usr/lib \
-		-lgtest -lgtest_main -pthread
-
-${TEST_DIRS}:
-	mkdir -p $@
 
 ################################################################################
 #
