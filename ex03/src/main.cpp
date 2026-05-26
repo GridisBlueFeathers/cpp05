@@ -6,7 +6,7 @@
 /*   By: svereten <svereten@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 13:59:06 by svereten          #+#    #+#             */
-/*   Updated: 2026/04/14 13:56:13 by svereten         ###   ########.fr       */
+/*   Updated: 2026/05/26 12:31:48 by svereten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,4 +42,6 @@ int main() {
 	john.executeForm(*pardon);
 
 	delete robotomy;
+	delete shruberry;
+	delete pardon;
 }
