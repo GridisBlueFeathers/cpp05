@@ -6,7 +6,7 @@
 #    By: svereten <svereten@student.42vienna.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/29 13:57:20 by svereten          #+#    #+#              #
-#    Updated: 2026/05/26 12:19:48 by svereten         ###   ########.fr        #
+#    Updated: 2026/05/26 12:23:35 by svereten         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 ################################################################################
@@ -46,7 +46,7 @@ ${NAME}: ${OBJS} ${OBJ_DIR}/main.o
 	${CXX} ${CXXFLAGS} $^ -o $@
 
 ${OBJ_DIR}/%.o: ${SRC_DIR}/%.cpp | ${OBJ_DIRS}
-	bear --append -- ${CXX} ${CXXFLAGS} ${INCLUDE} ${DEFS} -c $< -o $@
+	${CXX} ${CXXFLAGS} ${INCLUDE} ${DEFS} -c $< -o $@
 
 ${OBJ_DIRS}:
 	mkdir -p $@
